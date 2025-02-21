@@ -17,44 +17,61 @@ function App() {
     // console.log("halo 3")
 
     // Example using promise
-    console.log("halo 1");
-    fetchDataWithPromise().then((result) => {
-      console.log("halo 2");
-      console.log("Promise:", result);
-    });
-    console.log("halo 3");
+    // console.log("halo 1");
+    // fetchDataWithPromise().then((result) => {
+    //   console.log("halo 2");
+    //   console.log("Promise:", result);
+    // });
+    // console.log("halo 3");
 
     // Example using async/await
-    // async function fetchData() {
-    //   const result = await fetchDataWithAsyncAwait();
-    //   console.log("Async/Await:", result);
-    //   setData(result);
-    // }
-    // fetchData();
+    
+    async function fetchData() {
+      const result = await fetchDataWithAsyncAwait();
+      console.log("Async/Await:", result);
+      setData(result);
+      fungsiSaya(result)
+
+    }
+    console.log("halo 1");
+    fetchData();
+    
   }, []);
 
   // Callback example
   function fetchDataWithCallback(callback) {
-    setTimeout(() => {
-      callback("Data from callback");
-    }, 2000);
+    // setTimeout(() => {
+    //   callback("Data from callback");
+    // }, 2000);
+    //fetch api
+
+    fetch('https://jsonplaceholder.typicode.com/todos/1').then(response => response.json()).then(json => {console.log(json); setData(json.title)});
   }
 
   // Promise example
   function fetchDataWithPromise() {
     return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve("Data from promise");
-      }, 2000);
+      // setTimeout(() => {
+      //   resolve("Data from promise");
+      // }, 2000);
+      fetch("https://jsonplaceholder.typicode.com/todos/1")
+        .then((response) => response.json())
+        .then((json) => {
+          console.log(json);
+          setData(json.title);
+        });
     });
   }
 
   // Async/Await example
   async function fetchDataWithAsyncAwait() {
     return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve("Data from async/await");
-      }, 1000);
+      fetch("https://jsonplaceholder.typicode.com/todos/1")
+        .then((response) => response.json())
+        .then((json) => {
+          console.log(json);
+          setData(json.title);
+        });
     });
   }
 
